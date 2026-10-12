@@ -13,6 +13,7 @@
     "eval:agents": "node scripts/eval_agents.ts",
     "inspect": "node scripts/inspect_case.ts",
     "shot": "node scripts/shot.ts",
+    "e2e": "node scripts/e2e_live.ts",
     "proposal:pdf": "node scripts/make_proposal_pdf.ts"
   },
   "dependencies": {
