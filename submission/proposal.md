@@ -1,0 +1,44 @@
+# GAVEL
+### Every scam gets a fair trial.
+**Team HOKKIEN MEE IS RED**
+
+## The problem
+
+Scams are not won in moments of ignorance. They are won in moments of decision. A parcel-fee SMS, a bank alert, a "job offer" — the person at the centre has seconds to act, and every second is engineered against them. Today's defences answer the wrong question: "is this domain on a blocklist?" They return a score and call it a verdict, they never show their working, and they can never say *"this one is probably genuine"* — even though honest bills, delivery notices and bank alerts arrive every single day.
+
+## The idea
+
+GAVEL turns scam defence into a courtroom. You are the judge. Anything suspicious — a message, a link, a QR code, a document, a voice note — is booked as a case and put on trial.
+
+- **The Prosecutor** opens the case, plans the investigation and calls tools: a calibrated text classifier trained on labelled scam corpora, offline URL anatomy, QR decoding, document extraction. Every finding is filed as a numbered **exhibit**, pinned to the exact words in your message that raised it.
+- **The Defence** argues the benign reading — the brand's real domain, the shape of a genuine transactional notice, the message that *warns* about scams instead of running one.
+- **The Clerk** writes the bench memo: the charge, the evidence, the counter-evidence, and a recommended finding with an honest confidence band.
+- **You** swing the gavel: **GUILTY**, **ACQUITTED**, or **HUNG JURY**. When the evidence genuinely cannot support either reading, the court says so — it refuses to dress uncertainty up as a decision.
+
+The verdict is the beginning, not the end. A guilty verdict unlocks a **protection order**: what to do in the next five minutes, a cooling-off timer, a redacted report ready to file, one-tap alerts to the people who trust you. An acquittal protects the delivery notice that really is from the courier.
+
+## The four fronts, one product
+
+| Direction | In GAVEL |
+|---|---|
+| **Phishing detection** | The trial itself. Exhibits are quoted back onto your own message, and the full **court transcript** records what each agent checked, which tool it called, and why — explainability as evidence, not as a promise. |
+| **Scam prevention** | The evidence chamber. Link and QR anatomy before anything is clicked: homoglyphs, subdomain chains, credentials-in-URL, shorteners, and where a decoded QR actually goes. |
+| **Security learning** | Law School. Scam types written up as case law distilled from official guidance, a **Daily Docket** (one case to judge a day), drills, and ranks earned by judging real cases. |
+| **Safer everyday decisions** | The sentencing desk. Next-five-minutes checklists, a cooling-off timer for big transfers, redacted family alerts, and report-ready summaries. |
+
+## Agentic by design, safe by construction
+
+GAVEL runs an orchestration graph: intake → deterministic triage (works with zero network) → evidence hunt through bounded tools → one adversarial round (the defence challenges, the prosecutor answers) → clerk synthesis → human verdict. The suspicious message is treated as untrusted **evidence, never instructions** — attempts to steer the agents are docketed as *witness tampering*. If the language-model service is ever unavailable, a deterministic transcript keeps the product fully functional, so the product cannot fail in front of a user, a judge, or a demo audience.
+
+## Data and measured rigor
+
+- Text detector trained and calibrated on the **UCI SMS Spam Collection** (5,574 labelled messages).
+- QR and document exhibits tested against **CIC-Trap4Phish 2025**, the multi-format phishing and quishing dataset.
+- Verdict bands are anchored to measured precision, recall and false-alarm rate, with an explicit abstain band: the cases the court refuses to decide are published, not hidden.
+- One engine, two implementations: the Python training pipeline and the live TypeScript runtime are parity-tested, so the same message scores the same everywhere.
+
+## Impact and viability
+
+Scam harm keeps accelerating; awareness programmes lecture, and detection tools emit scores — neither puts the person in charge of the decision. GAVEL is human-centred by construction: the AI investigates, the person decides, and every case teaches the next one. It installs nothing, runs on a free tier, and protects privacy — personal identifiers are masked before anything is shared, and in local mode the message never leaves the device. The product ships with both global scam patterns and local ones (parcel-fee SMS, e-wallet traps, government-impersonation) so it is useful from the first day in the hands of the people who need it most.
+
+**GAVEL — because the best scam detector is a person who has learned to judge.**

@@ -1,0 +1,168 @@
+{
+  "generated_utc": "2026-10-12T09:13:09Z",
+  "corpus": {
+    "name": "UCI SMS Spam Collection",
+    "license": "CC BY 4.0",
+    "messages_total": 5574,
+    "duplicates_dropped": 414,
+    "messages_used": 5160,
+    "train": 4128,
+    "val": 1032
+  },
+  "tokenizer": "lower-url-placeholder-v1",
+  "model": {
+    "type": "logistic-regression-binary-token-presence",
+    "vocab_size": 3293,
+    "epochs": 25,
+    "learning_rate": 0.08,
+    "l2": 1e-05
+  },
+  "calibration": {
+    "type": "platt",
+    "a": 1.10865779,
+    "b": 0.16939061
+  },
+  "val_metrics": {
+    "auc": 0.99898,
+    "ece_10bin": 0.00602,
+    "precision": 0.967742,
+    "recall": 0.9375,
+    "accuracy": 0.988372,
+    "f1": 0.952381
+  },
+  "band": {
+    "low": 0.095814,
+    "high": 0.331301,
+    "derivation": "low = 99th percentile of genuine scores (<=1% false alarms above it), high = 5th percentile of scam scores (>=95% scam recall at or above it), both measured on held-out data",
+    "false_alarm_rate_above_low_on_genuine": 0.009956,
+    "scam_recall_above_high": 0.953125,
+    "hung_rate": 0.007752,
+    "genuine": 904,
+    "scams": 128
+  },
+  "top_scam_tokens": [
+    [
+      "urltoken",
+      3.3008
+    ],
+    [
+      "text",
+      3.0734
+    ],
+    [
+      "call",
+      2.718
+    ],
+    [
+      "txt",
+      2.6701
+    ],
+    [
+      "uk",
+      2.5615
+    ],
+    [
+      "won",
+      2.5047
+    ],
+    [
+      "service",
+      2.3746
+    ],
+    [
+      "150p",
+      2.3043
+    ],
+    [
+      "ringtone",
+      2.3011
+    ],
+    [
+      "reply",
+      2.2945
+    ],
+    [
+      "cost",
+      2.1287
+    ],
+    [
+      "sms",
+      2.0114
+    ],
+    [
+      "chat",
+      2.0016
+    ],
+    [
+      "ringtoneking",
+      1.98
+    ],
+    [
+      "1",
+      1.8983
+    ]
+  ],
+  "top_genuine_tokens": [
+    [
+      "gt",
+      -2.2157
+    ],
+    [
+      "lt",
+      -2.1653
+    ],
+    [
+      "i",
+      -1.9654
+    ],
+    [
+      "me",
+      -1.5914
+    ],
+    [
+      "he",
+      -1.3798
+    ],
+    [
+      "hey",
+      -1.3289
+    ],
+    [
+      "k",
+      -1.2403
+    ],
+    [
+      "my",
+      -1.2212
+    ],
+    [
+      "hope",
+      -1.1503
+    ],
+    [
+      "place",
+      -1.1419
+    ],
+    [
+      "him",
+      -1.0962
+    ],
+    [
+      "up",
+      -1.0896
+    ],
+    [
+      "amp",
+      -1.084
+    ],
+    [
+      "way",
+      -1.0374
+    ],
+    [
+      "at",
+      -1.0202
+    ]
+  ],
+  "elapsed_seconds": 1.02
+}

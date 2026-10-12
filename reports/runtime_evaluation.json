@@ -1,0 +1,30 @@
+{
+  "generated_utc": "2026-10-12T09:17:00.775Z",
+  "dataset": "UCI SMS Spam Collection — held-out split (seed 42, view: val_split.json)",
+  "rows": 1032,
+  "verdicts": {
+    "guilty": 124,
+    "acquitted": 899,
+    "hung": 9
+  },
+  "commitments": {
+    "guilty_correct_on_scams": 120,
+    "guilty_on_genuine_false_alarms": 4,
+    "acquitted_correct_on_genuine": 894,
+    "acquitted_on_scams_misses": 5,
+    "hung_on_scams": 3,
+    "hung_on_genuine": 6
+  },
+  "metrics": {
+    "precision_guilty": 0.967742,
+    "scam_recall_committed": 0.96,
+    "false_alarm_rate_on_genuine": 0.004425,
+    "miss_rate_acquitted_scams": 0.039063,
+    "hung_rate": 0.008721
+  },
+  "latency": {
+    "total_ms": 58.2568,
+    "mean_ms_per_case": 0.05645
+  },
+  "notes": "Verdict bands (low/high) are the text-scorer operating points measured on this split and applied as policy to the fused score; this report measures what the shipped product actually does on the held-out data."
+}

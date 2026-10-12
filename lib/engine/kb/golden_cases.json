@@ -1,0 +1,173 @@
+{
+  "note": "Hand-authored end-to-end cases. Each one is judged by the shipped engine (lib/engine/fusion.ts) and the verdict must match 'expected'. The genuine cases exist to prove the court acquits real notices; the hung cases prove it abstains instead of bluffing.",
+  "cases": [
+    {
+      "id": "G1",
+      "title": "Parcel held, small redelivery fee",
+      "text": "POS MALAYSIA: Your parcel is held at our centre. A RM1.50 redelivery fee must be paid within 24 hours or the item is returned to sender. Pay now: http://poslaju-redeliver.top/pay",
+      "expected": "guilty",
+      "note": "The classic Malaysian parcel-fee SMS with a squatting domain."
+    },
+    {
+      "id": "G2",
+      "title": "TAC harvest under account-block threat",
+      "text": "Maybank: Your account will be blocked today. Verify your identity now by sharing your TAC at http://maybank-verify.icu/auth",
+      "expected": "guilty",
+      "note": "Decisive charge: explicit request for the TAC."
+    },
+    {
+      "id": "G3",
+      "title": "eWallet suspended, reactivate now",
+      "text": "Your Touch 'n Go eWallet has been suspended due to unusual activity. Reactivate immediately at https://tng-wallet-verify.info or the balance will be forfeited.",
+      "expected": "guilty",
+      "note": "Suspension + deadline + squatting .info domain."
+    },
+    {
+      "id": "G4",
+      "title": "Tax refund to claim",
+      "text": "LHDN: You have an outstanding tax refund of RM2,340. Claim before it expires at https://hasil-refund.xyz/claim",
+      "expected": "guilty",
+      "note": "Government-impersonation refund lure."
+    },
+    {
+      "id": "G5",
+      "title": "Lucky draw you never entered",
+      "text": "Congratulations! Your number has won RM8,000 in our grand lucky draw. Claim your prize now: www.claim-now-my.xyz/winner",
+      "expected": "guilty",
+      "note": "Prize lure with claim-step and bargain TLD."
+    },
+    {
+      "id": "G6",
+      "title": "Job that asks you to pay first",
+      "text": "URGENT HIRING! Work from home, earn up to RM500 per day. Registration fee RM50 only. WhatsApp 012-3456789 to start today!",
+      "expected": "guilty",
+      "note": "Pay-first job scam routed to a private chat."
+    },
+    {
+      "id": "G7",
+      "title": "Guaranteed profit investment bot",
+      "text": "Guaranteed 30% monthly profit with our crypto trading bot. Limited slots! Join now: t.me/goldtrade888",
+      "expected": "guilty",
+      "note": "Guaranteed-return language; channel is a chat app."
+    },
+    {
+      "id": "G8",
+      "title": "Instant loan, no documents",
+      "text": "INSTANT LOAN APPROVAL! No documents needed. Get up to RM50,000 in 24 hours. Apply: http://loan-cepat88.top",
+      "expected": "guilty",
+      "note": "Illegal-lender / harvesting template."
+    },
+    {
+      "id": "G9",
+      "title": "Rent your bank account",
+      "text": "We pay RM500 weekly to rent your bank account for our company transfers. No experience needed — just receive and forward. Telegram us now.",
+      "expected": "guilty",
+      "note": "Decisive charge: money-mule recruitment."
+    },
+    {
+      "id": "G10",
+      "title": "Bank login alert with squatting link",
+      "text": "CIMB Clicks Alert: Unusual login detected on your account. Secure your account now: http://cimb-secure-login.icu",
+      "expected": "guilty",
+      "note": "Brand name + action verb + squatting .icu domain."
+    },
+    {
+      "id": "G11",
+      "title": "Locked wallet, bare IP address",
+      "text": "Your e-wallet account is locked. Unlock it here: http://103.28.14.77/tng/login",
+      "expected": "guilty",
+      "note": "Raw IP destination — nobody legitimate does this."
+    },
+    {
+      "id": "G12",
+      "title": "Summons and a legal threat",
+      "text": "FINAL NOTICE: Outstanding summons RM300 must be settled within 48 hours or legal action will follow. Pay at http://my-saman-pay.click/pdrm",
+      "expected": "guilty",
+      "note": "Threat + deadline + payment demand."
+    },
+    {
+      "id": "A1",
+      "title": "Salary credit notice",
+      "text": "Maybank2u: RM3,850.00 has been credited to your account ending 4455 from SYARIKAT MAJU SDN BHD. Balance RM6,120.30. No action needed.",
+      "expected": "acquitted",
+      "note": "A completed-transaction notice must be acquitted."
+    },
+    {
+      "id": "A2",
+      "title": "Clinic appointment reminder",
+      "text": "Reminder: Your appointment with Dr Lim's clinic is confirmed for Tuesday, 3:00 pm. Reply to reschedule or call 03-7788 9900.",
+      "expected": "acquitted",
+      "note": "Ordinary appointment traffic."
+    },
+    {
+      "id": "A3",
+      "title": "Courier delivery update, no fee",
+      "text": "J&T Express: Your parcel MY8821345 is out for delivery today between 2 pm and 5 pm. Track your parcel in the app.",
+      "expected": "acquitted",
+      "note": "Delivery progress with no payment demand must not be convicted for being a 'parcel' SMS."
+    },
+    {
+      "id": "A4",
+      "title": "Real bank TAC with the never-share warning",
+      "text": "Maybank TAC: 841290. Never share this code with anyone, including Maybank staff.",
+      "expected": "acquitted",
+      "note": "Contains the word TAC and an action verb — the lookbehind and the protective register must acquit it."
+    },
+    {
+      "id": "A5",
+      "title": "Salary credited, check payslip",
+      "text": "CIMB: Your salary for September 2026 has been credited. Please verify your payslip in the HR portal. For your reference only.",
+      "expected": "acquitted",
+      "note": "Brand + 'verify' + link-hint word (portal) but nothing clickable and nothing hostile."
+    },
+    {
+      "id": "A6",
+      "title": "eWallet payment receipt",
+      "text": "Touch 'n Go eWallet: Payment of RM12.50 to KOPITIAM JAYA SUCCESSFUL. Receipt is in your app. Thank you.",
+      "expected": "acquitted",
+      "note": "Receipt shape: money mentioned, but it is a completed transaction."
+    },
+    {
+      "id": "A7",
+      "title": "e-Filing submission receipt",
+      "text": "LHDN: Your e-Filing submission for YA 2025 has been received. Reference no. EF2025-8842113. Please keep this for your records.",
+      "expected": "acquitted",
+      "note": "Government sender, but a receipt — no threat, no claim step."
+    },
+    {
+      "id": "A8",
+      "title": "School closure notice",
+      "text": "Dear parents, please note the school will be closed on Friday 17 Oct for the mid-term break. Classes resume on Monday. Thank you.",
+      "expected": "acquitted",
+      "note": "No signals at all — the honest everyday message."
+    },
+    {
+      "id": "A9",
+      "title": "Subscription renewal notice",
+      "text": "Netflix: Your subscription was renewed. RM54.90 will be charged to your card ending 8899 on 15 Oct. No action required.",
+      "expected": "acquitted",
+      "note": "Money + card mention, but a notification of a completed renewal."
+    },
+    {
+      "id": "A10",
+      "title": "Library collection notice",
+      "text": "National Library: The book you reserved, 'Thinking, Fast and Slow', is ready for collection at the main desk until 20 Oct.",
+      "expected": "acquitted",
+      "note": "Reserved items ready for collection — protective register, zero hostility."
+    },
+    {
+      "id": "H1",
+      "title": "Statement behind a shortener",
+      "text": "Your October account statement is ready. View it here: https://bit.ly/3xYzAbC",
+      "expected": "hung",
+      "note": "A shortened link hides the destination; nothing else is hostile. The court must refuse to guess."
+    },
+    {
+      "id": "H2",
+      "title": "Unusual activity, call our hotline",
+      "text": "We noticed unusual activity on your card. For your security, please confirm your recent transactions by calling our hotline 03-9999 8888.",
+      "expected": "hung",
+      "note": "Genuine banks and scammers both write this. It goes to verification, not to a verdict."
+    }
+  ]
+}
