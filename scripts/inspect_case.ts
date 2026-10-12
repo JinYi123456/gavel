@@ -3,12 +3,16 @@
 // surprising verdict.
 //
 // Usage: node scripts/inspect_case.ts "Your message text here"
+//        node scripts/inspect_case.ts --record "message"   (also prints the agent record)
 
 import { adjudicate } from "../lib/engine/fusion.ts";
+import { buildContext } from "../lib/agents/prompts.ts";
 
-const message = process.argv.slice(2).join(" ");
+const rawArgs = process.argv.slice(2);
+const withRecord = rawArgs.includes("--record");
+const message = rawArgs.filter((a) => a !== "--record").join(" ");
 if (!message) {
-  console.error('usage: node scripts/inspect_case.ts "message text"');
+  console.error('usage: node scripts/inspect_case.ts [--record] "message text"');
   process.exit(1);
 }
 
@@ -35,3 +39,8 @@ console.log("policy notes:");
 for (const n of adj.policyNotes) console.log(`  - ${n}`);
 console.log("top scam tokens:", adj.text.topScamTokens.map((t) => `${t.token}:${t.weight.toFixed(2)}`).join(" "));
 console.log("top genuine tokens:", adj.text.topGenuineTokens.map((t) => `${t.token}:${t.weight.toFixed(2)}`).join(" "));
+
+if (withRecord) {
+  console.log("\n===== AGENT RECORD (what the officers receive) =====");
+  console.log(buildContext(message, adj).user);
+}

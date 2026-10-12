@@ -275,6 +275,7 @@ export function analyzeUrl(rawUrl: string): UrlReport {
   }
 
   const score = noisyOr(evidence.map((e) => e.severity));
+  evidence.sort((a, b) => b.severity - a.severity);
   return { url: rawUrl, host, registrable, scheme: url.protocol.replace(":", ""), isOfficial: official, officialBrand, evidence, score };
 }
 
