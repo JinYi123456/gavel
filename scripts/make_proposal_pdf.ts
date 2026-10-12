@@ -35,12 +35,12 @@ const html = `<!doctype html>
   body {
     font-family: "Inter", system-ui, sans-serif;
     color: var(--ink);
-    font-size: 10.3pt;
-    line-height: 1.5;
+    font-size: 10pt;
+    line-height: 1.42;
     margin: 0;
   }
   .sheet {
-    padding: 4mm 2mm 10mm;
+    padding: 4mm 2mm 4mm;
   }
   .masthead {
     display: flex;
@@ -79,15 +79,15 @@ const html = `<!doctype html>
   h2 {
     font-family: "Fraunces", Georgia, serif;
     font-size: 13.5pt;
-    margin: 16px 0 6px;
+    margin: 13px 0 5px;
     color: var(--ink);
     border-bottom: 1px solid var(--edge);
     padding-bottom: 3px;
   }
-  p { margin: 0 0 7px; }
+  p { margin: 0 0 5px; }
   strong { color: var(--ink); }
   ul { margin: 0 0 8px 16px; padding: 0; }
-  li { margin-bottom: 3px; }
+  li { margin-bottom: 2px; }
   table {
     width: 100%;
     border-collapse: collapse;
