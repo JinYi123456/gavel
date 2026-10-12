@@ -128,7 +128,7 @@ export default function IntakeDesk({ onSubmit, busy }: Props) {
       setRecSeconds(0);
       recTimer.current = setInterval(() => setRecSeconds((s) => s + 1), 1000);
     } catch {
-      setError("Microphone unavailable. You can also upload an audio file.");
+      setError("Microphone unavailable. Use “Upload an audio file” instead.");
     }
   }, [recording]);
 
@@ -187,7 +187,7 @@ export default function IntakeDesk({ onSubmit, busy }: Props) {
             ["voice", "Voice note"],
           ] as [Tab, string][]
         ).map(([id, label]) => (
-          <button key={id} className="intake-tab" role="tab" aria-pressed={tab === id} onClick={() => setTab(id)}>
+          <button key={id} className="intake-tab" role="tab" aria-pressed={tab === id} onClick={() => { setTab(id); setError(null); }}>
             {label}
           </button>
         ))}
@@ -246,13 +246,27 @@ export default function IntakeDesk({ onSubmit, busy }: Props) {
 
       {tab === "voice" && (
         <div style={{ textAlign: "center", padding: "10px 0 4px" }}>
-          <button className={recording ? "btn btn-primary" : "btn btn-brass"} onClick={() => void toggleRecording()} disabled={transcribing}>
-            {recording ? `Stop — recording ${recSeconds}s` : transcribing ? "Transcribing" : "Record the call or voicemail"}
-          </button>
+          <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
+            <button className={recording ? "btn btn-primary" : "btn btn-brass"} onClick={() => void toggleRecording()} disabled={transcribing}>
+              {recording ? `Stop — recording ${recSeconds}s` : transcribing ? "Transcribing" : "Record the call or voicemail"}
+            </button>
+            <label className="btn btn-ghost" style={{ cursor: "pointer" }}>
+              Upload an audio file
+              <input
+                type="file"
+                accept="audio/*"
+                hidden
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) void transcribe(f, "file");
+                }}
+              />
+            </label>
+          </div>
           <p className="muted-note" style={{ marginTop: 10 }}>
             {transcribing
               ? "Reading the voice note…"
-              : "Play the suspicious voicemail near the mic — or drop an audio file anywhere on this card."}
+              : "Record it playing near the mic, upload the audio file, or drop it anywhere on this card."}
           </p>
         </div>
       )}
