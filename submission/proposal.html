@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #241c12;
+    --ink-soft: #5a4c39;
+    --oxblood: #7c1d17;
+    --brass: #8a6a2a;
+    --paper: #fbf6ea;
+    --edge: #ddd0b4;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    color: var(--ink);
+    font-size: 10.3pt;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .sheet {
+    padding: 4mm 2mm 10mm;
+  }
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 3px double var(--brass);
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+  }
+  .wordmark {
+    font-family: "Special Elite", monospace;
+    letter-spacing: 0.3em;
+    font-size: 15pt;
+    color: var(--oxblood);
+  }
+  .masthead .meta {
+    font-family: "Special Elite", monospace;
+    font-size: 8.5pt;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+    text-align: right;
+  }
+  h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 24pt;
+    color: var(--oxblood);
+    margin: 2px 0 2px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 13pt;
+    margin: 2px 0 2px;
+    color: var(--ink);
+  }
+  h2 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 13.5pt;
+    margin: 16px 0 6px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--edge);
+    padding-bottom: 3px;
+  }
+  p { margin: 0 0 7px; }
+  strong { color: var(--ink); }
+  ul { margin: 0 0 8px 16px; padding: 0; }
+  li { margin-bottom: 3px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 10px;
+    font-size: 9.6pt;
+  }
+  th {
+    font-family: "Special Elite", monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: left;
+    color: var(--brass);
+    border-bottom: 2px solid var(--brass);
+    padding: 4px 8px 4px 0;
+  }
+  td {
+    border-bottom: 1px solid var(--edge);
+    padding: 4px 8px 4px 0;
+    vertical-align: top;
+  }
+  tr { page-break-inside: avoid; }
+  hr { border: none; border-top: 1px dashed var(--edge); margin: 12px 0; }
+  a { color: var(--oxblood); text-decoration: none; }
+  .rule-note {
+    margin-top: 14px;
+    font-family: "Special Elite", monospace;
+    font-size: 8.6pt;
+    color: var(--ink-soft);
+    border-top: 3px double var(--brass);
+    padding-top: 6px;
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="masthead">
+      <span class="wordmark">GAVEL</span>
+      <span class="meta">Proposal / technical summary<br/>Team HOKKIEN MEE IS RED</span>
+    </div>
+    <h1>GAVEL</h1>
+<h3>Every scam gets a fair trial.</h3>
+<p><strong>Team HOKKIEN MEE IS RED</strong></p>
+<h2>The problem</h2>
+<p>Scams are not won in moments of ignorance. They are won in moments of decision. A parcel-fee SMS, a bank alert, a &quot;job offer&quot; — the person at the centre has seconds to act, and every second is engineered against them. Today&#39;s defences answer the wrong question: &quot;is this domain on a blocklist?&quot; They return a score and call it a verdict, they never show their working, and they can never say <em>&quot;this one is probably genuine&quot;</em> — even though honest bills, delivery notices and bank alerts arrive every single day.</p>
+<h2>The idea</h2>
+<p>GAVEL turns scam defence into a courtroom. You are the judge. Anything suspicious — a message, a link, a QR code, a document, a voice note — is booked as a case and put on trial.</p>
+<ul>
+<li><strong>The Prosecutor</strong> opens the case, plans the investigation and calls tools: a calibrated text classifier trained on labelled scam corpora, offline URL anatomy, QR decoding, document extraction. Every finding is filed as a numbered <strong>exhibit</strong>, pinned to the exact words in your message that raised it.</li>
+<li><strong>The Defence</strong> argues the benign reading — the brand&#39;s real domain, the shape of a genuine transactional notice, the message that <em>warns</em> about scams instead of running one.</li>
+<li><strong>The Clerk</strong> writes the bench memo: the charge, the evidence, the counter-evidence, and a recommended finding with an honest confidence band.</li>
+<li><strong>You</strong> swing the gavel: <strong>GUILTY</strong>, <strong>ACQUITTED</strong>, or <strong>HUNG JURY</strong>. When the evidence genuinely cannot support either reading, the court says so — it refuses to dress uncertainty up as a decision.</li>
+</ul>
+<p>The verdict is the beginning, not the end. A guilty verdict unlocks a <strong>protection order</strong>: what to do in the next five minutes, a cooling-off timer, a redacted report ready to file, one-tap alerts to the people who trust you. An acquittal protects the delivery notice that really is from the courier.</p>
+<h2>The four fronts, one product</h2>
+<table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>In GAVEL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Phishing detection</strong></td>
+<td>The trial itself. Exhibits are quoted back onto your own message, and the full <strong>court transcript</strong> records what each agent checked, which tool it called, and why — explainability as evidence, not as a promise.</td>
+</tr>
+<tr>
+<td><strong>Scam prevention</strong></td>
+<td>The evidence chamber. Link and QR anatomy before anything is clicked: homoglyphs, subdomain chains, credentials-in-URL, shorteners, and where a decoded QR actually goes.</td>
+</tr>
+<tr>
+<td><strong>Security learning</strong></td>
+<td>Law School. Scam types written up as case law distilled from official guidance, a <strong>Daily Docket</strong> (one case to judge a day), drills, and ranks earned by judging real cases.</td>
+</tr>
+<tr>
+<td><strong>Safer everyday decisions</strong></td>
+<td>The sentencing desk. Next-five-minutes checklists, a cooling-off timer for big transfers, redacted family alerts, and report-ready summaries.</td>
+</tr>
+</tbody></table>
+<h2>Agentic by design, safe by construction</h2>
+<p>GAVEL runs an orchestration graph: intake → deterministic triage (works with zero network) → evidence hunt through bounded tools → three drafted officers (a prosecutor, a defence and a clerk, as language-model agents) → the judge&#39;s gavel. The suspicious message is treated as untrusted <strong>evidence, never instructions</strong> — attempts to steer the agents are docketed as <em>witness tampering</em>.</p>
+<p>Two mechanisms make the court trustworthy in a way a single chatbot can never be:</p>
+<ul>
+<li><strong>The verification gate.</strong> Every drafted speech is checked before it may speak: real prose structure, and <strong>every word inside quotation marks must exist character-for-character in the court record</strong>. A draft that invents evidence is discarded. Fabricated quotes reach the screen zero times, by construction rather than by promise.</li>
+<li><strong>The scripted bench.</strong> When no model service is available — offline, rate-limited, or failing the gate — the officers&#39; arguments are compiled deterministically from the exhibits themselves. The courtroom completes every trial, with or without a network. The product cannot fail in front of a user, a judge, or a demo audience.</li>
+</ul>
+<h2>Data and measured rigor</h2>
+<ul>
+<li>Text detector trained and calibrated on the <strong>UCI SMS Spam Collection</strong> (5,574 labelled messages): held-out AUC <strong>0.9990</strong>, calibration error <strong>0.0060</strong>.</li>
+<li>The complete shipped engine, evaluated on 1,032 held-out messages: <strong>precision 96.8%</strong>, scam recall <strong>96.0%</strong>, false alarms on genuine messages <strong>0.44%</strong>, sent to hung jury <strong>0.87%</strong>, <strong>0.06 ms</strong> per case on device.</li>
+<li>A 24-case authored golden set (modern parcels, tax lures, genuine notices, two designed to be undecidable) passes <strong>24/24</strong> in the shipped test suite.</li>
+<li>QR and document exhibits are validated against the <strong>CIC-Trap4Phish 2025</strong> multi-format phishing and quishing dataset.</li>
+<li>One engine, two implementations: the Python training pipeline and the live TypeScript runtime are parity-tested, and the published numbers are regenerated by the repository&#39;s own evaluation scripts.</li>
+</ul>
+<h2>Impact and viability</h2>
+<p>Scam harm keeps accelerating; awareness programmes lecture, and detection tools emit scores — neither puts the person in charge of the decision. GAVEL is human-centred by construction: the AI investigates, the person decides, and every case teaches the next one. It installs nothing, runs on a free tier, and protects privacy — personal identifiers are masked before anything is shared, and in local mode the message never leaves the device. The product ships with both global scam patterns and local ones (parcel-fee SMS, e-wallet traps, government-impersonation) so it is useful from the first day in the hands of the people who need it most.</p>
+<p><strong>GAVEL — because the best scam detector is a person who has learned to judge.</strong></p>
+
+    <div class="rule-note">Every scam gets a fair trial. The AI investigates — the person decides.</div>
+  </div>
+</body>
+</html>

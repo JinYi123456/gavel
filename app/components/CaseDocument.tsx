@@ -69,23 +69,24 @@ export default function CaseDocument({ caseId, dateIso, message, adjudication, r
           <span className="casefile-date">{dateIso}</span>
         </div>
         <div className="casefile-body" aria-label="The message under trial">
-          {segments.map((seg, i) =>
-            seg.mark ? (
+          {segments.map((seg, i) => {
+            if (!seg.mark) return <span key={i}>{seg.text}</span>;
+            const mark = seg.mark;
+            const exhibit = shown[mark.index];
+            return (
               <mark
                 key={i}
                 className="exhibit-mark"
-                data-active={activeId === shown[seg.mark.index]?.id}
-                onMouseEnter={() => onActivate(shown[seg.mark.index]?.id ?? null)}
+                data-active={activeId === exhibit?.id}
+                onMouseEnter={() => onActivate(exhibit?.id ?? null)}
                 onMouseLeave={() => onActivate(null)}
-                title={shown[seg.mark.index]?.title}
+                title={exhibit?.title}
               >
                 {seg.text}
-                <sup>{exhibitLetter(seg.mark.index)}</sup>
+                <sup>{exhibitLetter(mark.index)}</sup>
               </mark>
-            ) : (
-              <span key={i}>{seg.text}</span>
-            )
-          )}
+            );
+          })}
         </div>
         <div className="casefile-foot">
           <span className="type muted-note">
@@ -116,7 +117,7 @@ export default function CaseDocument({ caseId, dateIso, message, adjudication, r
                 {typeof ex.severity === "number" && (
                   <span className="sev" aria-label={`severity ${(ex.severity * 100).toFixed(0)} of 100`}>
                     {[0, 1, 2, 3, 4].map((i) => (
-                      <i key={i} data-on={i < Math.max(1, Math.round(ex.severity * 5))} />
+                      <i key={i} data-on={i < Math.max(1, Math.round((ex.severity ?? 0) * 5))} />
                     ))}
                   </span>
                 )}

@@ -41,6 +41,10 @@ function docketCase() {
 
 const EXPECT = { guilty: "scam", acquitted: "genuine", hung: "can't tell" } as const;
 
+function expectedWord(expected: string): string {
+  return EXPECT[expected as keyof typeof EXPECT] ?? "can't tell";
+}
+
 export default function LawSchoolPage() {
   const [openArticle, setOpenArticle] = useState<string | null>(null);
   const [rank, setRank] = useState<{ rank: Rank; next: Rank | null; total: number }>({
@@ -115,9 +119,9 @@ export default function LawSchoolPage() {
           ) : (
             <div className="drill-feedback">
               <strong>
-                {docketChoice === EXPECT[docket.expected]
+                {docketChoice === expectedWord(docket.expected)
                   ? "The bench agrees."
-                  : `The bench ruled: ${EXPECT[docket.expected].toUpperCase()}.`}
+                  : `The bench ruled: ${expectedWord(docket.expected).toUpperCase()}.`}
               </strong>{" "}
               {docket.note}
             </div>

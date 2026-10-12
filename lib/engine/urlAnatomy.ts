@@ -18,7 +18,7 @@ export interface UrlReport {
   registrable: string;
   scheme: string;
   isOfficial: boolean;
-  officialBrand?: string;
+  officialBrand?: BrandRecord;
   evidence: UrlEvidence[];
   score: number;
 }
