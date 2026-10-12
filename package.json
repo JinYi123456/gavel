@@ -9,7 +9,11 @@
     "build": "next build",
     "start": "next start",
     "test": "node --test tests/engine.test.ts",
-    "evaluate": "node scripts/evaluate_runtime.ts"
+    "evaluate": "node scripts/evaluate_runtime.ts",
+    "eval:agents": "node scripts/eval_agents.ts",
+    "inspect": "node scripts/inspect_case.ts",
+    "shot": "node scripts/shot.ts",
+    "proposal:pdf": "node scripts/make_proposal_pdf.ts"
   },
   "dependencies": {
     "jsqr": "^1.4.0",

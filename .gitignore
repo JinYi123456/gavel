@@ -32,3 +32,4 @@ data/tmp/
 *.tsbuildinfo
 next-env.d.ts
 .vercel
+.env*
