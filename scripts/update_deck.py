@@ -114,6 +114,12 @@ honest = prs.slides[find_slide("THE HONEST RECORD")]
 layout = prs.slides[0].slide_layout
 business = prs.slides.add_slide(layout)
 
+# The parchment is a slide-level background (p:bg), not the layout's; a new
+# slide would otherwise inherit white. Copy the element from an existing page.
+src_bg = honest._element.cSld.find(qn("p:bg"))
+if src_bg is not None:
+    business._element.cSld.insert(0, copy.deepcopy(src_bg))
+
 eyebrow_src = next(s for s in honest.shapes if s.has_text_frame and s.text_frame.text == "THE HONEST RECORD")
 headline_src = next(s for s in honest.shapes if s.has_text_frame and "What it cannot do" in s.text_frame.text)
 panel_src = next(s for s in honest.shapes if s.shape_type == 1 and s.width > Inches(5))
