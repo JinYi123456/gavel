@@ -40,7 +40,7 @@ compiled deterministically from the exhibits, takes the floor instead.
 THE GAVEL — GUILTY · ACQUITTED · HUNG JURY. The human decides, always.
 ```
 
-Two properties hold by construction, not by promise:
+Three properties hold by construction, not by promise:
 
 - **The evidence comes first, and it is deterministic.** Every tool has already run and every exhibit is on
   the record before an officer is drafted. The language models argue over a fixed record; they cannot choose
