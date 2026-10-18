@@ -25,7 +25,7 @@ export default function AboutPage() {
       <ul>
         <li>
           <strong>The language scorer.</strong> A logistic regression classifier, calibrated, trained on the UCI SMS
-          Spam Collection (5,574 labelled messages). It reads the message as a probability — and its calibration is
+          Spam Collection (5,574 messages collected; 5,160 after removing duplicates). It reads the message as a probability — and its calibration is
           measured, not assumed.
         </li>
         <li>

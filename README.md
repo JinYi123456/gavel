@@ -25,7 +25,7 @@ the courier.
 ```
 intake (text · link · QR · document · voice — decoded on your device)
    │
-   ├─ THE STATUTE BOOK     34 numbered rules — 27 charges, 7 protective marks; exact quotes
+   ├─ THE STATUTE BOOK     34 numbered rules — 28 charges, 6 protective marks; exact quotes
    ├─ THE ADDRESS EXAMINER link & QR-destination anatomy, fully offline
    └─ THE LANGUAGE SCORER  logistic regression, calibrated on labelled scam corpora
    │
