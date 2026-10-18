@@ -29,7 +29,12 @@ function sessionId(): string {
     const key = "gavel.session.v1";
     let id = sessionStorage.getItem(key);
     if (!id) {
-      id = crypto.randomUUID();
+      // randomUUID needs a secure context; a LAN demo over http must still
+      // get a per-tab bucket instead of falling back to the shared IP bucket.
+      id =
+        typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+          ? crypto.randomUUID()
+          : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
       sessionStorage.setItem(key, id);
     }
     return id;
