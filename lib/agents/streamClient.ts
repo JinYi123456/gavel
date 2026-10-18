@@ -22,6 +22,22 @@ interface TrialEvent {
   mode?: string;
 }
 
+// One bucket per browser tab, not per IP: every judge behind the same campus
+// NAT must not spend from the same rate limit.
+function sessionId(): string {
+  try {
+    const key = "gavel.session.v1";
+    let id = sessionStorage.getItem(key);
+    if (!id) {
+      id = crypto.randomUUID();
+      sessionStorage.setItem(key, id);
+    }
+    return id;
+  } catch {
+    return "anon";
+  }
+}
+
 export async function streamTrial(
   message: string,
   adjudication: Adjudication,
@@ -37,7 +53,7 @@ export async function streamTrial(
   try {
     const res = await fetch("/api/trial", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-gavel-session": sessionId() },
       body: JSON.stringify(payload),
       signal,
     });

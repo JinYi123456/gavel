@@ -31,14 +31,24 @@ type Who = "prosecutor" | "defence" | "clerk";
 const ORDER: Who[] = ["prosecutor", "defence", "clerk"];
 
 const RATE_WINDOW_MS = 5 * 60 * 1000;
-const RATE_MAX = 30;
+const RATE_MAX = Number(process.env.GAVEL_RATE_MAX ?? 60);
+
+// The bench is drafted in parallel but the court may not wait on it: after
+// LIVE_GRACE_MS the scripted bench speaks, so a slow or failing model cannot
+// stall a trial in front of a user. Drafts that land later are discarded.
+const LIVE_GRACE_MS = Number(process.env.GAVEL_LIVE_GRACE_MS ?? 5000);
+const TRIAL_BUDGET_MS = Number(process.env.GAVEL_TRIAL_BUDGET_MS ?? 15_000);
+
 const hits = new Map<string, number[]>();
 
-function rateLimited(ip: string): boolean {
+// Keyed by IP + the browser's session id. Every judge behind one campus NAT
+// gets their own bucket instead of exhausting a shared one.
+function rateLimited(ip: string, session: string): boolean {
   const now = Date.now();
-  const arr = (hits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  const key = `${ip}:${session}`;
+  const arr = (hits.get(key) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
   arr.push(now);
-  hits.set(ip, arr);
+  hits.set(key, arr);
   if (hits.size > 5000) hits.clear();
   return arr.length > RATE_MAX;
 }
@@ -51,7 +61,8 @@ type Send = (obj: unknown) => void;
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
-  if (rateLimited(ip)) {
+  const session = req.headers.get("x-gavel-session")?.slice(0, 64) || "anon";
+  if (rateLimited(ip, session)) {
     return new Response(JSON.stringify({ error: "The court is at capacity — try again in a few minutes." }), {
       status: 429,
       headers: { "Content-Type": "application/json" },
@@ -86,17 +97,33 @@ export async function POST(req: NextRequest) {
       send({ type: "mode", mode });
       try {
         // Draft all three officers while the client is still stamping exhibits.
-        const deadline = Date.now() + 38_000;
-        const drafts =
+        // Each draft is tracked with its settlement state so a later officer can
+        // take a draft the earlier one didn't wait for.
+        const deadline = Date.now() + TRIAL_BUDGET_MS;
+        const liveUntil = Date.now() + LIVE_GRACE_MS;
+        const pending =
           mode === "live"
             ? ORDER.map((who) => draftOfficer(who, record, adjudication, deadline))
             : ORDER.map(() => Promise.resolve<string | null>(null));
+        const settled = pending.map(() => ({ done: false, value: null as string | null }));
+        pending.forEach((p, i) => {
+          p.then((v) => {
+            settled[i].done = true;
+            settled[i].value = v;
+          }).catch(() => {
+            settled[i].done = true;
+            settled[i].value = null;
+          });
+        });
 
         let fellBack = false;
         for (let i = 0; i < ORDER.length; i++) {
           const who = ORDER[i];
           send({ type: "start", who });
-          const live = await drafts[i];
+          const live =
+            mode === "live"
+              ? await withinGrace(pending[i], settled[i], Math.max(0, liveUntil - Date.now()))
+              : null;
           if (live) {
             await typeOut(send, who, live, 8);
             send({ type: "end", who, mode: "live" });
@@ -105,7 +132,7 @@ export async function POST(req: NextRequest) {
               fellBack = true;
               send({
                 type: "notice",
-                note: "One or more officers were replaced by the scripted bench — their drafts did not pass the court's verification gate. Every word shown has been checked against the record.",
+                note: "One or more officers were replaced by the scripted bench — their drafts did not pass the court's verification gate in time. Every word shown has been checked against the record.",
               });
             }
             await typeOut(send, who, scripted[i].text, 10);
@@ -203,6 +230,20 @@ async function tryModel(
   } finally {
     clearTimeout(timer);
   }
+}
+
+// Wait for a draft only until the trial's grace expires. If the draft is not
+// ready by then the scripted bench takes the floor; a late draft is discarded
+// rather than swapping words under the judge's eyes mid-speech.
+async function withinGrace(
+  draft: Promise<string | null>,
+  state: { done: boolean; value: string | null },
+  ms: number
+): Promise<string | null> {
+  if (state.done) return state.value;
+  if (ms <= 0) return null;
+  const timeout = new Promise<null>((resolve) => setTimeout(() => resolve(null), ms));
+  return Promise.race([draft.catch(() => null), timeout]);
 }
 
 async function typeOut(send: Send, who: Who, text: string, msPerChunk: number): Promise<void> {
