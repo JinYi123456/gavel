@@ -25,7 +25,7 @@ the courier.
 ```
 intake (text · link · QR · document · voice — decoded on your device)
    │
-   ├─ THE STATUTE BOOK     40+ numbered charges; matches become exhibits with exact quotes
+   ├─ THE STATUTE BOOK     34 numbered rules — 27 charges, 7 protective marks; exact quotes
    ├─ THE ADDRESS EXAMINER link & QR-destination anatomy, fully offline
    └─ THE LANGUAGE SCORER  logistic regression, calibrated on labelled scam corpora
    │
@@ -42,6 +42,9 @@ THE GAVEL — GUILTY · ACQUITTED · HUNG JURY. The human decides, always.
 
 Two properties hold by construction, not by promise:
 
+- **The evidence comes first, and it is deterministic.** Every tool has already run and every exhibit is on
+  the record before an officer is drafted. The language models argue over a fixed record; they cannot choose
+  what to inspect, so the suspect message cannot steer the investigation.
 - **Fabricated evidence cannot reach the screen.** The gate checks every quote against the record; the
   scripted bench cannot invent by design.
 - **A trial always finishes.** With no model service — offline, rate-limited, failing — the officers read
